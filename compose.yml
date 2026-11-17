@@ -1,0 +1,29 @@
+services:
+  web:
+    build:
+      context: .
+      target: serve
+      args:
+        - BUILD_MODE=${BUILD_MODE:-development}
+        - VITE_APP_API=${VITE_APP_API}
+        - VITE_ADMIN_EMAIL=${VITE_ADMIN_EMAIL}
+        - VITE_ADMIN_WHATSAPP=${VITE_ADMIN_WHATSAPP}
+    image: vue-ui:latest
+    container_name: vue-ui-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # Service bantu (tidak jalan otomatis), contoh:
+  # docker compose run --rm node npm install --legacy-peer-deps
+  node:
+    image: node:26-slim
+    profiles: ["tools"]
+    working_dir: /app
+    user: node
+    volumes:
+      - .:/app
+    environment:
+      npm_config_update_notifier: "false"
+    entrypoint: []
+    command: ["sh"]
