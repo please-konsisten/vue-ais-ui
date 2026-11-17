@@ -4,8 +4,15 @@ ARG NGINX_VERSION=stable-alpine
 # ---------- Install dependency ----------
 FROM node:${NODE_VERSION}-slim AS deps
 WORKDIR /app
-COPY package*.json ./
+RUN chown -R node:node /app
+COPY --chown=node:node package*.json ./
+USER node
 RUN npm i --legacy-peer-deps
+
+FROM deps AS development
+COPY --chown=node:node . .
+EXPOSE 5173
+CMD [ "sh", "-c", "npm run dev -- --host" ]
 
 # ---------- Build Vue ----------
 FROM deps AS builder

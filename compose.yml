@@ -1,4 +1,20 @@
 services:
+  dev:
+    build:
+      context: .
+      target: development
+    user: node
+    environment:
+      - BUILD_MODE=${BUILD_MODE:-development}
+      - VITE_APP_API=${VITE_APP_API}
+      - VITE_ADMIN_EMAIL=${VITE_ADMIN_EMAIL}
+      - VITE_ADMIN_WHATSAPP=${VITE_ADMIN_WHATSAPP}
+    volumes:
+      - .:/app
+    ports:
+      - 5173:5173
+    container_name: vue-ui-web-dev
+    
   web:
     build:
       context: .

@@ -1,65 +1,60 @@
 <script setup lang="ts">
+import axios from 'axios'
 import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { loginSchema } from '../schemas/login.schema'
+import z from 'zod'
+import { useAuthStore } from '@/api/login'
 
 const router = useRouter()
 const route = useRoute()
+const authStore = useAuthStore()
+
 
 const form = reactive({
-  email: '',
+  identifier: '',
   password: '',
   remember: false,
 })
 
-const errors = reactive({ email: '', password: '' })
+const errors = reactive({ identifier: '', password: '' })
 const serverError = ref('')
 const loading = ref(false)
 const showPassword = ref(false)
 
-function validate(): boolean {
-  errors.email = ''
-  errors.password = ''
-
-  if (!form.email) {
-    errors.email = 'Email wajib diisi'
-  } else if (!/^\S+@\S+\.\S+$/.test(form.email)) {
-    errors.email = 'Format email tidak valid'
-  }
-
-  if (!form.password) {
-    errors.password = 'Password wajib diisi'
-  } else if (form.password.length < 6) {
-    errors.password = 'Password minimal 6 karakter'
-  }
-
-  return !errors.email && !errors.password
-}
-
 async function handleSubmit() {
   serverError.value = ''
-  if (!validate()) return
+  errors.identifier = ''
+  errors.password = ''
+
+  const result = loginSchema.safeParse({
+    identifier: form.identifier,
+    password: form.password,
+  })
+
+  if (!result.success) {
+    const fieldErrors = z.treeifyError(result.error)
+    errors.identifier = fieldErrors.properties?.identifier?.errors?.[0] ?? ''
+    errors.password = fieldErrors.properties?.password?.errors?.[0] ?? ''
+    return
+  }
 
   loading.value = true
   try {
-    // TODO: ganti dengan request ke backend, misalnya:
-    // const res = await fetch(`${import.meta.env.VITE_APP_API}/auth/login`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email: form.email, password: form.password }),
-    // })
-    // if (!res.ok) throw new Error('Email atau password salah')
-    await new Promise((resolve) => setTimeout(resolve, 800)) // simulasi
-
-    // Setelah login berhasil, kembali ke halaman tujuan (kalau ada) atau dashboard
-    const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : '/dashboard'
-    await router.push(redirect)
+    await authStore.login(result.data)
+    router.push('/dashboard')
   } catch (e) {
-    serverError.value = e instanceof Error ? e.message : 'Terjadi kesalahan, coba lagi'
+    if (axios.isAxiosError(e)) {
+      serverError.value = e.response?.data?.message || 'Login gagal, periksa kredensial Anda'
+    } else {
+      serverError.value = e instanceof Error ? e.message : 'Terjadi kesalahan, coba lagi'
+    }
   } finally {
     loading.value = false
   }
 }
 </script>
+
 
 <template>
   <div class="flex min-h-svh items-center justify-center px-4 py-10">
@@ -91,17 +86,16 @@ async function handleSubmit() {
 
         <!-- Email -->
         <div>
-          <label for="email" class="mb-1.5 block text-sm font-medium text-secondary">Email</label>
+          <label for="identifier" class="mb-1.5 block text-sm font-medium text-secondary">Username Or Email</label>
           <input
-            id="email"
-            v-model.trim="form.email"
-            type="email"
-            autocomplete="email"
+            id="identifier"
+            v-model.trim="form.identifier"
+            type="text"
             placeholder="nama@email.com"
             class="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-            :class="errors.email ? 'border-red-400' : 'border-border'"
+            :class="errors.identifier ? 'border-red-400' : 'border-border'"
           />
-          <p v-if="errors.email" class="mt-1 text-xs text-red-600">{{ errors.email }}</p>
+          <p v-if="errors.identifier" class="mt-1 text-xs text-red-600">{{ errors.identifier }}</p>
         </div>
 
         <!-- Password -->
