@@ -4,10 +4,9 @@ import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loginSchema } from '../schemas/login.schema'
 import z from 'zod'
-import { useAuthStore } from '@/api/login'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
-const route = useRoute()
 const authStore = useAuthStore()
 
 
@@ -41,8 +40,10 @@ async function handleSubmit() {
 
   loading.value = true
   try {
-    await authStore.login(result.data)
-    router.push('/dashboard')
+    const response = await authStore.login(result.data)
+    if (response.status === 200) {
+      router.push('/dashboard')
+    }
   } catch (e) {
     if (axios.isAxiosError(e)) {
       serverError.value = e.response?.data?.message || 'Login gagal, periksa kredensial Anda'
