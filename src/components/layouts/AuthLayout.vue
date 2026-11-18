@@ -16,6 +16,9 @@ const description = computed(
     (route.meta.description as string) ??
     'Masuk untuk melanjutkan ke dashboard dan melihat data terbaru.',
 )
+
+import { useThemeStore } from '@/stores/theme'
+useThemeStore()
 </script>
 
 <template>
