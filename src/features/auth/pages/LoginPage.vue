@@ -41,7 +41,7 @@ async function handleSubmit() {
   try {
     const response = await authStore.login(result.data)
     if (response.status === 200) {
-      router.push('/')
+      router.push('/dashboard')
     }
   } catch (e) {
     if (axios.isAxiosError(e)) {

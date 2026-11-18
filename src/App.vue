@@ -16,9 +16,9 @@ watch(
   () => authStore.isAuthenticated,
   (isAuth) => {
     if (isAuth && (route.path === '/' || route.meta.requiresGuest)) {
-      router.replace('/dashboard')
+      router.push("/dashboard")
     } else if (!isAuth && (route.path === '/' || route.meta.requiresAuth)) {
-      router.replace('/login')
+      router.push("/login")
     }
   }
 )
