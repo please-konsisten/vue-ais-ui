@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
-import { useThemeStore } from '@/stores/theme'
-
-useThemeStore()
-
 const route = useRoute()
 const sidebarOpen = ref(false)
 
 const menu = [
-  { label: 'Beranda', to: '/', icon: 'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10' },
   { label: 'Dashboard', to: '/dashboard', icon: 'M4 4h7v9H4zM13 4h7v5h-7zM13 11h7v9h-7zM4 15h7v5H4z' },
-  { label: 'Tentang', to: '/about', icon: 'M12 3a9 9 0 100 18 9 9 0 000-18zM12 11v5M12 8h.01' },
 ]
 
 const pageTitle = computed(() => String(route.meta.title ?? 'Aplikasi'))
