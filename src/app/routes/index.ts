@@ -2,26 +2,43 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppLayout from '@/components/layouts/AppLayout.vue'
 import { studentRoutes } from './sub-routes/student'
 import { useAuthStore } from '@/stores/auth'
+import AuthLayout from '@/components/layouts/AuthLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/features/auth/pages/LoginPage.vue'),
+      path: '',
+      component: AuthLayout,
       meta: {
-        title: 'Masuk',
         requiresGuest: true,
       },
+      children:[
+        {
+          path:'login',
+          meta:{ title:'Login'},
+          component: () => import('@/features/auth/pages/LoginPage.vue'),
+        },
+        {
+          path:'register',
+          meta:{ title:'Register'},
+          component: () => import('@/features/auth/pages/RegisterPage.vue'),
+        },
+        {
+          path:'account-helper',
+          meta:{ title:'Account Helper'},
+          component: () => import('@/features/auth/pages/AccountHelperPage.vue'),
+        },
+      ],
     },
     {
-      path: '/',
+      path: '',
       component: AppLayout,
-      children: [...studentRoutes],
       meta: {
         requiresAuth: true,
+        title:'App'
       },
+      children: [...studentRoutes],
     },
   ],
 })
