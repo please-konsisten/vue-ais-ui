@@ -5,8 +5,6 @@ import AppLayout from '@/components/layouts/AppLayout.vue'
 import AuthLayout from '@/components/layouts/AuthLayout.vue'
 // Custome Stores
 import { useAuthStore } from '@/stores/auth'
-import { adminRoutes } from './sub-routes/admin'
-import { studentRoutes } from './sub-routes/student'
 import { useRoleStore } from '@/stores/role'
 
 const router = createRouter({
@@ -46,11 +44,17 @@ const router = createRouter({
           component: AppLayout,
           meta: { requiresAuth: true, title: 'App' },
           children: [
+            /**
+             * Sharing Routes
+             */
             {
               path: 'dashboard',
-              meta: { roles: ['student', 'admin'], title: 'Dashboard' },
+              meta: { roles: ['student', 'admin', 'lecture'], title: 'Dashboard' },
               component: () => import('@/features/dashboard/Page.vue'),
-            }
+            },
+            /**
+             * Student Role Routes
+             */
           ],
         }
       ]
