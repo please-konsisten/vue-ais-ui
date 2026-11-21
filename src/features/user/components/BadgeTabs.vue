@@ -13,7 +13,7 @@ const activeTab = ref('student')
       <TabsTrigger value="admin">Admin</TabsTrigger>
     </TabsList>
 
-    <TabsContent :value="activeTab">
+    <TabsContent :value="activeTab" class="flex-1">
       <slot :active-tab="activeTab" />
     </TabsContent>
   </Tabs>

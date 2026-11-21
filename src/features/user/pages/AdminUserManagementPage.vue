@@ -3,6 +3,15 @@ import { ref, watch } from 'vue';
 import axios from 'axios';
 import InformationCard from '../components/InformationCard.vue';
 import BadgeTabs from '../components/BadgeTabs.vue';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCaption
+} from '@/components/ui/table'
 
 type RoleType = 'student' | 'lecture' | 'admin';
 
@@ -25,14 +34,19 @@ const usersHeadTable = ref([
   { name: 'role', style: 'w-28 shrink-0 px-2 py-2' },
 ]);
 
-function getDataAxios(tab: RoleType) {
-  axios.get(`/data-dummy/users/${tab}.json`)
-    .then((response) => {
-      usersBodyTable.value = response.data;
-    })
-    .catch((error) => {
-      console.error('Gagal mengambil data:', error);
-    });
+const isLoading = ref(false);
+
+async function getDataAxios(tab: RoleType) {
+  isLoading.value = true;
+  try {
+    const response = await axios.get(`/data-dummy/users/${tab}.json`);
+    usersBodyTable.value = response.data;
+  } catch (error) {
+    console.error('Gagal mengambil data:', error);
+    usersBodyTable.value = [];
+  } finally {
+    isLoading.value = false;
+  }
 }
 
 watch(activeTab, (newTab) => {
@@ -44,30 +58,36 @@ watch(activeTab, (newTab) => {
   <InformationCard />
 
   <BadgeTabs v-model="activeTab">
-    <div class="w-full overflow-x-auto">
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr class="flex flex-row items-center w-full border-b font-semibold">
-            <th v-for="({ name, style }, index) in usersHeadTable" :key="index" :class="style">
-              {{ name }}
-            </th>
-          </tr>
-        </thead>
+    <Table>
+      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead v-for="({ name }, index) in usersHeadTable" :key="index">
+            {{ name }}
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow v-if="isLoading">
+          <TableCell :colspan="usersHeadTable.length" class="text-center py-6 text-muted-foreground">
+            Memuat data...
+          </TableCell>
+        </TableRow>
 
-        <tbody>
-          <tr
-            v-for="(user, index) in usersBodyTable"
-            :key="user.id || index"
-            class="flex flex-row items-center w-full border-b"
-          >
-            <td class="w-14 shrink-0 px-2 py-2">{{ index + 1 }}</td>
-            <td class="w-36 shrink-0 px-2 py-2 truncate">{{ user.username }}</td>
-            <td class="flex-1 min-w-[180px] px-2 py-2 truncate">{{ user.email }}</td>
-            <td class="w-28 shrink-0 px-2 py-2">{{ user.status }}</td>
-            <td class="w-28 shrink-0 px-2 py-2">{{ user.role }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <TableRow v-else-if="usersBodyTable.length === 0">
+          <TableCell :colspan="usersHeadTable.length" class="text-center py-6 text-muted-foreground">
+            Tidak ada data user.
+          </TableCell>
+        </TableRow>
+
+        <TableRow v-else v-for="(user, index) in usersBodyTable" :key="user.id || index">
+          <TableCell>{{ index + 1 }}</TableCell>
+          <TableCell>{{ user.username }}</TableCell>
+          <TableCell>{{ user.email }}</TableCell>
+          <TableCell>{{ user.status }}</TableCell>
+          <TableCell>{{ user.role }}</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   </BadgeTabs>
 </template>

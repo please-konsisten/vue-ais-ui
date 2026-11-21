@@ -11,4 +11,10 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
+  optimizeDeps: {
+    include: [
+      'reka-ui',
+      'lucide-vue-next',
+    ],
+  },
 })
