@@ -1,12 +1,49 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { useRoleStore } from '@/stores/role'
+
+type Role = 'student' | 'admin' | 'lecture'
+
+interface MenuItem {
+  label: string
+  to: string
+  icon: string
+}
+
 const route = useRoute()
+const roleStore = useRoleStore()
 const sidebarOpen = ref(false)
 
-const menu = [
-  { label: 'Dashboard', to: '/dashboard', icon: 'M4 4h7v9H4zM13 4h7v5h-7zM13 11h7v9h-7zM4 15h7v5H4z' },
-]
+// Path ikon SVG, tambah di sini kalau butuh ikon baru
+const icons = {
+  dashboard: 'M4 4h7v9H4zM13 4h7v5h-7zM13 11h7v9h-7zM4 15h7v5H4z',
+}
+
+// Menu per role. `to` harus sama dengan path route milik role tersebut.
+const menuByRole: Record<Role, MenuItem[]> = {
+  student: [
+    { label: 'Dashboard', to: '/dashboard', icon: icons.dashboard },
+    // { label: 'KRS', to: '/krs', icon: icons.krs },
+    // { label: 'Nilai', to: '/nilai', icon: icons.nilai },
+  ],
+  admin: [
+    { label: 'Dashboard', to: '/admin/dashboard', icon: icons.dashboard },
+    { label: 'User Management', to: '/admin/users', icon: icons.dashboard },
+  ],
+  lecture: [
+    { label: 'Dashboard', to: '/lecture/dashboard', icon: icons.dashboard },
+  ],
+}
+
+const menu = computed<MenuItem[]>(() => {
+  const role = roleStore.roleName
+  // hasOwnProperty supaya nilai seperti "toString" tidak ikut cocok
+  if (role && Object.prototype.hasOwnProperty.call(menuByRole, role)) {
+    return menuByRole[role as Role]
+  }
+  return []
+})
 
 const pageTitle = computed(() => String(route.meta.title ?? 'Aplikasi'))
 </script>

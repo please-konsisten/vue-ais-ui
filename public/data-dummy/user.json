@@ -1,0 +1,142 @@
+[
+  {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "username": "budi_santoso",
+    "email": "budi.santoso@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+    "username": "siti_rahma",
+    "email": "siti.rahma@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+    "username": "admin_sistem",
+    "email": "admin@kampus.ac.id",
+    "role": "admin",
+    "status": "active"
+  },
+  {
+    "id": "6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
+    "username": "andi_pratama",
+    "email": "andi.pratama@student.kampus.ac.id",
+    "role": "student",
+    "status": "deactive"
+  },
+  {
+    "id": "c56a4180-65aa-42ec-a945-5fd21dec0538",
+    "username": "dewi_lestari",
+    "email": "dewi.lestari@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3301",
+    "username": "rizky_fajar",
+    "email": "rizky.fajar@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "886313e1-3b8a-5372-9b90-0c9aee199e5d",
+    "username": "putri_ayu",
+    "email": "putri.ayu@student.kampus.ac.id",
+    "role": "student",
+    "status": "deactive"
+  },
+  {
+    "id": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d",
+    "username": "hendro_w",
+    "email": "hendro.w@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "710b962e-041c-11e1-9234-0123456789ab",
+    "username": "nina_kusuma",
+    "email": "nina.kusuma@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "e89b12d3-a456-4266-1417-400000000001",
+    "username": "fajar_nugroho",
+    "email": "fajar.nugroho@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    "username": "admin_akademik",
+    "email": "akademik@kampus.ac.id",
+    "role": "admin",
+    "status": "active"
+  },
+  {
+    "id": "d9b2d63d-a233-4123-847a-7c35d4a6e38f",
+    "username": "agus_setiawan",
+    "email": "agus.setiawan@kampus.ac.id",
+    "role": "lecture",
+    "status": "deactive"
+  },
+  {
+    "id": "4a7d1ed4-1447-4d76-8290-2b35d6e7f8a9",
+    "username": "maya_indah",
+    "email": "maya.indah@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "5c8e2fe5-2558-4e87-9301-3c46e7f8a9b0",
+    "username": "dimas_aditya",
+    "email": "dimas.aditya@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "6d9f30f6-3669-4f98-a412-4d57f8a9b0c1",
+    "username": "lina_marlina",
+    "email": "lina.marlina@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "7e0a41a7-477a-40a9-b523-5e68a9b0c1d2",
+    "username": "yoga_permana",
+    "email": "yoga.permana@student.kampus.ac.id",
+    "role": "student",
+    "status": "deactive"
+  },
+  {
+    "id": "8f1b52b8-588b-41ba-c634-6f79b0c1d2e3",
+    "username": "tari_puspa",
+    "email": "tari.puspa@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "902c63c9-699c-42cb-d745-708ac1d2e3f4",
+    "username": "eko_prasetyo",
+    "email": "eko.prasetyo@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "013d74da-7aad-43dc-e856-819bd2e3f405",
+    "username": "wulan_sari",
+    "email": "wulan.sari@student.kampus.ac.id",
+    "role": "student",
+    "status": "active"
+  },
+  {
+    "id": "124e85eb-8bbe-44ed-f967-92ace3f40516",
+    "username": "bayu_kurniawan",
+    "email": "bayu.kurniawan@student.kampus.ac.id",
+    "role": "student",
+    "status": "deactive"
+  }
+]
