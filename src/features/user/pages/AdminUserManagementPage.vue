@@ -12,7 +12,13 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button/index.ts';
+import CreateAccountDialog from '../components/CreateAccountDialog.vue';
 
 type RoleType = 'student' | 'lecture' | 'admin';
 
@@ -59,13 +65,20 @@ watch(activeTab, (newTab) => {
   <InformationCard />
 
   <BadgeTabs v-model="activeTab">
-    <div class="flex flex-row">
-      <div class="flex-1">
-        <Input type="text" placeholder="Search" />
+    <div class="flex flex-row justify-between">
+      <div class="flex-1 max-w-96">
+        <Input type="text" placeholder="Search"/>
       </div>
-      <Button >
-        Create
+      <Dialog>
+    <DialogTrigger>
+      <Button>
+        Create Account
       </Button>
+    </DialogTrigger>
+    <DialogContent class="sm:max-w-md">
+      <CreateAccountDialog />
+    </DialogContent>
+  </Dialog>
     </div>
     <Table>
       <TableHeader>
