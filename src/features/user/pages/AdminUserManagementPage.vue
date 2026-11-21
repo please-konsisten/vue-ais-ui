@@ -9,9 +9,10 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
-  TableCaption
+  TableRow
 } from '@/components/ui/table'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button/index.ts';
 
 type RoleType = 'student' | 'lecture' | 'admin';
 
@@ -58,8 +59,15 @@ watch(activeTab, (newTab) => {
   <InformationCard />
 
   <BadgeTabs v-model="activeTab">
+    <div class="flex flex-row">
+      <div class="flex-1">
+        <Input type="text" placeholder="Search" />
+      </div>
+      <Button >
+        Create
+      </Button>
+    </div>
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead v-for="({ name }, index) in usersHeadTable" :key="index">
