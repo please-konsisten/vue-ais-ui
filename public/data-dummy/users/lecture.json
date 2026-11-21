@@ -1,0 +1,44 @@
+[
+  {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "username": "budi_santoso",
+    "email": "budi.santoso@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "c56a4180-65aa-42ec-a945-5fd21dec0538",
+    "username": "dewi_lestari",
+    "email": "dewi.lestari@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d",
+    "username": "hendro_w",
+    "email": "hendro.w@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "d9b2d63d-a233-4123-847a-7c35d4a6e38f",
+    "username": "agus_setiawan",
+    "email": "agus.setiawan@kampus.ac.id",
+    "role": "lecture",
+    "status": "deactive"
+  },
+  {
+    "id": "6d9f30f6-3669-4f98-a412-4d57f8a9b0c1",
+    "username": "lina_marlina",
+    "email": "lina.marlina@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  },
+  {
+    "id": "902c63c9-699c-42cb-d745-708ac1d2e3f4",
+    "username": "eko_prasetyo",
+    "email": "eko.prasetyo@kampus.ac.id",
+    "role": "lecture",
+    "status": "active"
+  }
+]

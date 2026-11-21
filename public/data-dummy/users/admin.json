@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+    "username": "admin_sistem",
+    "email": "admin@kampus.ac.id",
+    "role": "admin",
+    "status": "active"
+  },
+  {
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    "username": "admin_akademik",
+    "email": "akademik@kampus.ac.id",
+    "role": "admin",
+    "status": "active"
+  }
+]
